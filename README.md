@@ -1,0 +1,1 @@
+# wazuh-soarca-integration
