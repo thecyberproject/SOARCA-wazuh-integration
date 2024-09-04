@@ -92,6 +92,10 @@ def execute(alert_file_location, webhook, api_key):
             CACAO_VAR_TYPE_IP4,
             "agent ip that is affected",
             alert_json['agent']['ip'])
+        data["__user__"] = build_cacao_variable(
+            CACAO_VAR_TYPE_STRING,
+            "the effected user",
+            alert_json['syscheck']['uname_after'])
         data["__full_log_message__"] = build_cacao_variable(
             CACAO_VAR_TYPE_STRING,
             "the full log message from wazuh",
