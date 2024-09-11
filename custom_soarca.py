@@ -3,6 +3,7 @@
 import os
 import sys
 import json
+import html
 import requests
 from requests.auth import HTTPBasicAuth
 
@@ -54,7 +55,7 @@ def build_cacao_variable(type, description,  value) -> str:
     var = {
         "type": type,
         "description": description,
-        "value": value,
+        "value": str(value),
         "constant": True,
         "external": True
     }
@@ -96,15 +97,20 @@ def execute(alert_file_location, webhook, api_key):
             CACAO_VAR_TYPE_STRING,
             "the effected user",
             alert_json['syscheck']['uname_after'])
+        data["__path__"] = build_cacao_variable(
+            CACAO_VAR_TYPE_STRING,
+            "the effected file",
+            alert_json['syscheck']['path'])
         data["__full_log_message__"] = build_cacao_variable(
             CACAO_VAR_TYPE_STRING,
             "the full log message from wazuh",
-            alert_json['full_log'])
+            html.escape(alert_json['full_log'], quote=True))
 
         # Send the request
         # debug("before")
-        response = requests.post(url=webhook, data=data, headers=headers)
-        debug(response)
+        response = requests.post(
+            url=webhook, data=json.dumps(data), headers=headers)
+        debug(response.content)
 
 
 def main(args):
