@@ -73,6 +73,10 @@ def execute(alert_file_location, webhook, api_key):
         headers = {'content-type': 'application/json'}
 
         data = {}
+        data["__id__"] = build_cacao_variable(
+            CACAO_VAR_TYPE_STRING,
+            "The wazuh internal event ID that triggered the playbook",
+            alert_json['id'])
         data["__rule_id__"] = build_cacao_variable(
             CACAO_VAR_TYPE_INT,
             alert_json['rule']['description'],
