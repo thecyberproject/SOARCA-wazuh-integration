@@ -1,3 +1,4 @@
+import html
 import json
 import unittest
 from unittest.mock import patch, MagicMock
@@ -36,10 +37,10 @@ class TestSoarcaWazuhIntegration(unittest.TestCase):
         custom_soarca.execute(alert_file_location=file,
                               webhook=webhook, api_key=api_key)
         self.maxDiff = None
-        data = '''{"__rule_id__": {"type": "integer", "description": "File added to the system.", "value": "554", "constant": true, "external": true}, "__rule_level__": {"type": "integer", "description": "rule severity level 1 - 15", "value": 5, "constant": true, "external": true}, "__times_fired__": {"type": "integer", "description": "number of times the rile fired", "value": 14, "constant": true, "external": true}, "__affected_agent_name__": {"type": "string", "description": "agent name that is affected", "value": "deployment", "constant": true, "external": true}, "__affected_agent_ip__": {"type": "ipv4-addr", "description": "agent ip that is affected", "value": "192.168.130.29", "constant": true, "external": true}, "__user__": {"type": "string", "description": "the effected user", "value": "root", "constant": true, "external": true}, "__full_log_message__": {"type": "string", "description": "the full log message from wazuh", "value": "File '/home/ansible/file16' added Mode: realtime", "constant": true, "external": true}}'''
+        data = '''{"__id__": {"type": "string", "description": "The wazuh internal event ID that triggered the playbook", "value": "1721227225.1536988", "constant": true, "external": true}, "__rule_id__": {"type": "integer", "description": "File added to the system.", "value": "554", "constant": true, "external": true}, "__rule_level__": {"type": "integer", "description": "rule severity level 1 - 15", "value": "5", "constant": true, "external": true}, "__times_fired__": {"type": "integer", "description": "number of times the rile fired", "value": "14", "constant": true, "external": true}, "__affected_agent_name__": {"type": "string", "description": "agent name that is affected", "value": "deployment", "constant": true, "external": true}, "__affected_agent_ip__": {"type": "ipv4-addr", "description": "agent ip that is affected", "value": "192.168.130.29", "constant": true, "external": true}, "__user__": {"type": "string", "description": "the effected user", "value": "root", "constant": true, "external": true}, "__path__": {"type": "string", "description": "the effected file", "value": "/home/ansible/file16", "constant": true, "external": true}, "__full_log_message__": {"type": "string", "description": "the full log message from wazuh", "value": "File &#x27;/home/ansible/file16&#x27; added Mode: realtime", "constant": true, "external": true}}'''
 
         self.assertEqual(json.dumps(
-            mock_requests.call_args[1]["data"]), data)
+            mock_requests.call_args[1]["data"]), json.dumps(data))
         self.assertEqual(str(json.dumps(
             mock_requests.call_args[1]["url"])).replace("\"", ""), webhook)
 
