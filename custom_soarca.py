@@ -4,8 +4,6 @@ import os
 import sys
 import json
 import html
-import requests
-from requests.auth import HTTPBasicAuth
 
 # Exit error codes
 ERR_NO_REQUEST_MODULE = 1
