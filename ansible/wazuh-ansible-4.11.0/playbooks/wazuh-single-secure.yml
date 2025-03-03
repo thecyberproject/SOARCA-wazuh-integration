@@ -24,6 +24,8 @@
       - role: ../roles/wazuh/ansible-wazuh-manager
       - role: ../roles/wazuh/ansible-filebeat-oss
       - role: ../roles/wazuh/wazuh-dashboard
+    vars_files:
+        - vault.yml
     vars:
       single_node: true
       minimum_master_nodes: 1
