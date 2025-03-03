@@ -58,7 +58,10 @@
         - type: os
           type_value: Windows
           syscheck:
-            disable: 'no'
+            frequency: 43200
+            scan_on_start: 'yes'
+            auto_ignore: 'no'
+            disabled: 'no'
             directories:
               - dirs: C:\Users\*\Documents
                 checks: 'check_all="yes" realtime="yes"'            
