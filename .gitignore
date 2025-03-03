@@ -2,3 +2,4 @@
 *.vscode
 env/*
 *DS_Store
+ansible/wazuh-ansible-4.11.0/playbooks/vault.yml
