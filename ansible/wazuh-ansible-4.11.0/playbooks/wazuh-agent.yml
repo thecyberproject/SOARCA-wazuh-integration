@@ -6,7 +6,7 @@
     - ../roles/wazuh/ansible-wazuh-agent
   vars:
     wazuh_managers:
-      - address: "{{ vault_soarca_ip }}"
+      - address: "{{ vault_wazuh_ip }}"
         port: 1514
         protocol: tcp
         api_port: 55000

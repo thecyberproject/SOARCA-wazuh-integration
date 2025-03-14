@@ -53,7 +53,7 @@
           password: "{{ vault_api_password }}"
       wazuh_manager_integrations:
         - name: custom-soarca
-          hook_url: 'http://10.70.4.6:8080'
+          hook_url: "{{vault_soarca_ip }}"
           alert_format: 'json'
           rule_id: 554
       shared_agent_config:
