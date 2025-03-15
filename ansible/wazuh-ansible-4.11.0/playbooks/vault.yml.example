@@ -1,5 +1,5 @@
 ---
-vault_indexer_admin_password: "securityPassword12&&&"
+vault_indexer_admin_password: "securityPassword12@"
 vault_api_password: "SecureAPIPassword12##"
 vault_soarca_ip: http://10.13.37.6:8080
 vault_wazuh_ip: 10.13.37.5
