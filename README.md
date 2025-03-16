@@ -92,3 +92,7 @@ curl -X POST -H "Content-Type: application/json" -d @./playbook/starter-playbook
 - Trigger Windows agent by downloading the soarca logo from the GitHub
 
 https://raw.githubusercontent.com/COSSAS/SOARCA/refs/heads/development/assets/soarca-logo.svg
+
+
+## Some debug info can be found here
+https://groups.google.com/g/wazuh/c/EA4ZA1h18Ns
