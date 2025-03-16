@@ -20,9 +20,10 @@ ansible-playbook -e @playbooks/vault.yml playbooks/wazuh-single-secure.yml -i in
 wget https://raw.githubusercontent.com/thecyberproject/SOARCA-wazuh-integration/refs/heads/main/custom_soarca.py
 cp custom_soarca.py /var/ossec/integrations/custom-soarca.py
 cd /var/ossec/integrations/
+chown root:wazuh custom-soarca.py
+chmod 750 custom-soarca.py
+cp /var/ossec/integrations/slack /var/ossec/integrations/custom-soarca
 chown root:wazuh custom-soarca
-chmod 750 custom-soarca
-cp /var/ossec/integrations/slack to /var/ossec/integrations/soarca
 ```
 
 ## Install SOARCA
@@ -43,6 +44,7 @@ This is based on the guide https://wazuh.com/blog/detecting-and-responding-to-ma
 ```bash
 touch /var/ossec/etc/lists/malware-hashes
 echo -n 6297388ec99af270aca1b6d95c6879fe23015cecdbf6f9144aae5ae0892e25ee:soarca-logo > /var/ossec/etc/lists/malware-hashes
+chown root:wazuh /var/ossec/etc/lists/malware-hashes
 
 #Open the local rules
 nano /var/ossec/etc/rules/local_rules.xml
@@ -61,6 +63,10 @@ nano /var/ossec/etc/rules/local_rules.xml
     <description>A file - $(file) - in the malware blacklist was added to the system.</description>
   </rule>
 </group>
+
+
+# Add line to ossec conf
+<list>etc/lists/malware-hashes</list>  
 
 # Update wazuh soarca trigger
 Add rule to the settings of the manager
