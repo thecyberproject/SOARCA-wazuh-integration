@@ -69,7 +69,7 @@
                 {
                     "type": "http-api",
                     "command": "POST /services/T071ZSK9TNE/B0722B4RJBE/otvy3oShVPOHgOI4FTtiZRXv HTTP/1.1",
-                    "content": "{'text':'Received log: __full_log_message__:value'}"
+                    "content": "{'text':'Received log from : __affected_agent_name__:value'}"
                 }
             ],
             "agent": "soarca--3552da68-53d7-4e8c-8cc0-277d5ba2212a",
