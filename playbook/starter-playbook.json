@@ -1,0 +1,101 @@
+{
+    "type": "playbook",
+    "spec_version": "cacao-2.0",
+    "id": "playbook--57b08176-dd8e-4ba1-9105-036f3a6f1345",
+    "name": "Demo playbook",
+    "description": "Playbook to start with Wazuh SOARCA integration",
+    "created_by": "identity--64f88f4f-cb0f-445f-ad9a-6563427e03cb",
+    "created": "2025-03-15T20:15:00.000Z",
+    "modified": "2025-03-15T20:15:00.000Z",
+    "revoked": false,
+    "playbook_variables": {
+        "__user__": {
+            "type": "string",
+            "constant": false,
+            "external": true
+        },
+        "__path__": {
+            "type": "string",
+            "constant": false,
+            "external": true
+        },
+        "__rule_id__": {
+            "type": "integer",
+            "constant": false,
+            "external": true
+        },
+        "__id__": {
+            "type": "string",
+            "constant": false,
+            "external": true
+        },
+        "__rule_level__": {
+            "type": "integer",
+            "constant": false,
+            "external": true
+        },
+        "__times_fired__": {
+            "type": "integer",
+            "constant": false,
+            "external": true
+        },
+        "__affected_agent_name__": {
+            "type": "string",
+            "constant": false,
+            "external": true
+        },
+        "__affected_agent_ip__": {
+            "type": "ipv4-addr",
+            "constant": false,
+            "external": true
+        },
+        "__full_log_message__": {
+            "type": "string",
+            "constant": false,
+            "external": true
+        }
+    },
+    "workflow_start": "start--8f3919a1-e4a3-4d05-a960-905199e5da43",
+    "workflow": {
+        "start--8f3919a1-e4a3-4d05-a960-905199e5da43": {
+            "on_completion": "action--4cd73f97-391e-4618-8609-8ac1fbe7ed4b",
+            "type": "start"
+        },
+        "action--4cd73f97-391e-4618-8609-8ac1fbe7ed4b": {
+            "name": "Create ticket in slack",
+            "on_completion": "end--1f762009-06eb-4920-91d6-687e621a2dd1",
+            "type": "action",
+            "commands": [
+                {
+                    "type": "http-api",
+                    "command": "POST /services/T071ZSK9TNE/B08JK394X6U/sUJQf6y0KIyp6d8K5IFXh3g4 HTTP/1.1",
+                    "content": "{'text':'Received log from : __affected_agent_name__:value'}"
+                }
+            ],
+            "agent": "soarca--3552da68-53d7-4e8c-8cc0-277d5ba2212a",
+            "targets": [
+                "http-api--042feb4e-30eb-4dd0-a8fe-22388844f0f3"
+            ]
+        },
+        "end--1f762009-06eb-4920-91d6-687e621a2dd1": {
+            "type": "end"
+        }
+    },
+    "agent_definitions": {
+        "soarca--3552da68-53d7-4e8c-8cc0-277d5ba2212a": {
+            "type": "soarca",
+            "name": "soarca-http-api"
+        }
+    },
+    "target_definitions": {
+        "http-api--042feb4e-30eb-4dd0-a8fe-22388844f0f3": {
+            "type": "http-api",
+            "name": "Slack",
+            "address": {
+                "url": [
+                    "https://hooks.slack.com/"
+                ]
+            }
+        }
+    }
+}
