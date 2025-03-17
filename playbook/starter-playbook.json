@@ -68,7 +68,7 @@
             "commands": [
                 {
                     "type": "http-api",
-                    "command": "POST /services/T071ZSK9TNE/B0722B4RJBE/otvy3oShVPOHgOI4FTtiZRXv HTTP/1.1",
+                    "command": "POST /services/T071ZSK9TNE/B08JK394X6U/sUJQf6y0KIyp6d8K5IFXh3g4 HTTP/1.1",
                     "content": "{'text':'Received log from : __affected_agent_name__:value'}"
                 }
             ],
